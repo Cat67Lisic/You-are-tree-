@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LOL</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #000;
+            color: #fff;
+            font-family: 'Times New Roman', Times, serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+        #message {
+            font-size: 4vw;
+            text-align: center;
+            animation: flash 0.4s infinite;
+        }
+        .smilies {
+            font-size: 5vw;
+            margin-top: 10px;
+        }
+        @keyframes flash {
+            0%, 100% { opacity: 1; text-shadow: 0 0 10px #fff; }
+            50% { opacity: 0.3; text-shadow: 0 0 20px #fff; }
+        }
+    </style>
+</head>
+<body>
+    <div id="message">you are an Tree!</div>
+    <div class="smilies">☺ ☺ ☺</div>
+
+    <script>
+        // Ускоренное хаотичное перемещение (каждые 300–600 мс)
+        function moveRandomly() {
+            const width = 400;
+            const height = 300;
+            const x = Math.random() * (screen.width - width);
+            const y = Math.random() * (screen.height - height);
+
+            try {
+                window.moveTo(x, y);
+            } catch (e) {
+                console.log('window.moveTo не поддерживается');
+            }
+        }
+
+        setInterval(moveRandomly, Math.random() * 300 + 300); // 300–600 мс
+    </script>
+</body>
+</html>

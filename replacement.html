@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gotcha!</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #000;
+            color: red;
+            font-family: 'Times New Roman', Times, serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            overflow: hidden;
+        }
+        h1 {
+            font-size: 6vw;
+            animation: pulse 0.6s infinite;
+            margin: 0 0 20px 0;
+        }
+        .subtext {
+            font-size: 3vw;
+            color: #ff6666;
+            margin-bottom: 30px;
+            opacity: 0.8;
+        }
+        .smilies {
+            font-size: 8vw;
+            color: yellow;
+            margin: 20px 0;
+        }
+        @keyframes pulse {
+            0%, 100% { 
+                opacity: 1;
+                text-shadow: 0 0 15px red, 0 0 5px rgba(255, 0, 0, 0.5);
+            }
+            50% {
+                opacity: 0.5;
+                text-shadow: 0 0 30px red, 0 0 10px yellow, 0 0 2px rgba(255, 255, 0, 0.7);
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>YOU CAN'T ESCAPE!</h1>
+    <div class="subtext">The joke is on YOU!</div>
+    <div class="smilies">☺ ☺ ☺</div>
+
+    <script>
+        // 1. Открыть 5 дополнительных окон lol.html
+        for (let i = 0; i < 5; i++) {
+            const left = Math.random() * (screen.width - 400);
+            const top = Math.random() * (screen.height - 300);
+            window.open(
+                'lol.html',
+                '_blank',
+                `width=400,height=300,left=${left},top=${top}`
+            );
+        }
+
+        // 2. Бесконечное мигание фона (дополнительный эффект)
+        const body = document.body;
+        let flash = false;
+        setInterval(() => {
+            body.style.backgroundColor = flash ? '#330000' : '#000';
+            flash = !flash;
+        }, 800);
+
+        // 3. Случайное перемещение текущего окна
+        function moveWindow() {
+            try {
+                const x = Math.random() * (screen.width - 800);
+                const y = Math.random() * (screen.height - 600);
+                window.moveTo(x, y);
+            } catch (e) {
+                console.log('window.moveTo не поддерживается');
+            }
+        }
+
+        setInterval(moveWindow, 1500); // Каждые 1.5 секунды
+
+
+        // 4. Запрет на закрытие (дополнительное раздражение)
+        window.addEventListener('beforeunload', (e) => {
+            e.returnValue = 'Seriously? Again?';
+            // Повторно открываем replacement.html при попытке закрыть
+            window.open('replacement.html', '_blank', 'width=800,height=600');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Control Panel</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            background: #111;
+            color: #fff;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+        h1 {
+            color: #0f0;
+            text-shadow: 0 0 5px #0f0;
+        }
+        .btn {
+            background: #222;
+            color: #0f0;
+            border: 1px solid #0f0;
+            padding: 12px 24px;
+            margin: 10px 0;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+        .btn:hover {
+            background: #030;
+        }
+        .status {
+            margin-top: 20px;
+            font-style: italic;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+    <h1>CONTROL PANEL</h1>
+    <p>Закройте все созданные окна и отключите авто-запуск.</p>
+
+    <button class="btn" onclick="closeAllWindows()">Закрыть все окна</button>
+    <button class="btn" onclick="disableAutoLaunch()">Отключить авто-запуск</button>
+
+    <div class="status" id="status">Готов к работе.</div>
+
+    <script>
+        let openWindows = [];
+        let autoLaunchEnabled = true;
+
+        // 1. Закрыть все открытые окна
+        function closeAllWindows() {
+            openWindows.forEach(win => {
+                if (!win.closed) {
+                    win.close();
+                }
+            });
+            openWindows = [];
+            updateStatus('Все окна закрыты.');
+        }
+
+        // 2. Отключить авто-запуск (через localStorage)
+        function disableAutoLaunch() {
+            localStorage.setItem('jokeDisabled', 'true');
+            autoLaunchEnabled = false;
+            updateStatus('Авто-запуск ОТКЛЮЧЁН. Перезагрузите целевые страницы.');
+        }
+
+        // 3. Обновить статус
+        function updateStatus(msg) {
+            document.getElementById('status').textContent = msg;
+        }
+
+        // 4. При загрузке — проверить статус
+        window.addEventListener('load', () => {
+            if (localStorage.getItem('jokeDisabled') === 'true') {
+                autoLaunchEnabled = false;
+                updateStatus('Авто-запуск уже ОТКЛЮЧЁН.');
+            } else {
+                updateStatus('Авто-запуск АКТИВЕН.');
+            }
+
+            // Собрать все открытые окна (если они были созданы через window.open)
+            // Примечание: в реальности браузер не даёт полный доступ к чужим окнам
+            // Этот массив нужно заполнять вручную при создании окон
+        });
+
+        // 5. Пример: добавить окно в список (вызывайте при каждом window.open в других скриптах)
+        function registerWindow(win) {
+            openWindows.push(win);
+        }
+    </script>
+</body>
+</html>

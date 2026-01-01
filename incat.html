@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>InCat System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: #e0e0e0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .container {
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 15px;
+            padding: 40px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+        h1 {
+            color: #00ff9d;
+            margin-bottom: 30px;
+            text-shadow: 0 0 10px rgba(0, 255, 157, 0.5);
+            font-size: 2.5em;
+        }
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 15px 0;
+            margin: 15px 0;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .btn-virus {
+            background: #8b0000;
+            color: #ffaaaa;
+        }
+        .btn-control {
+            background: #005f40;
+            color: #aaffaa;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        .footer {
+            margin-top: 30px;
+            font-size: 0.9em;
+            color: #888;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>InCat System</h1>
+        <p>Выберите режим работы:</p>
+
+        <button class="btn btn-virus" onclick="goToVirus()">
+            ЗАПУСТИТЬ ВИРУС (index.html)
+        </button>
+
+        <button class="btn btn-control" onclick="goToControl()">
+            ПАНЕЛЬ УПРАВЛЕНИЯ (control.html)
+        </button>
+
+        <div class="footer">
+            <p>Система контроля и запуска демонстрационного сценария</p>
+            <p><small>Версия 1.0 | Только для тестирования</small></p>
+        </div>
+    </div>
+
+    <script>
+        function goToVirus() {
+            // Открываем index.html в новой вкладке
+            const win = window.open('index.html', '_blank');
+            if (win) {
+                win.focus();
+            } else {
+                alert('Не удалось открыть index.html. Разрешите всплывающие окна.');
+            }
+        }
+
+        function goToControl() {
+            // Открываем control.html в новой вкладке
+            const win = window.open('control.html', '_blank');
+            if (win) {
+                win.focus();
+            } else {
+                alert('Не удалось открыть control.html. Разрешите всплывающие окна.');
+            }
+        }
+    </script>
+</body>
+</html>

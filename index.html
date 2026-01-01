@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>You Are An Tree!</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            font-family: 'Times New Roman', Times, serif;
+            background-color: #000;
+            color: #fff;
+            cursor: pointer;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        #message {
+            font-size: 5vw;
+            line-height: 1.2;
+            animation: flash 0.5s infinite;
+        }
+        .smilies {
+            font-size: 6vw;
+            margin-top: 15px;
+        }
+        @keyframes flash {
+            0%, 100% { opacity: 1; text-shadow: 0 0 10px rgba(255, 255, 255, 0.7); }
+            50% { opacity: 0.3; text-shadow: 0 0 20px rgba(255, 255, 255, 1); }
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div id="message">you are an Tree!</div>
+        <div class="smilies">☺ ☺ ☺</div>
+    </div>
+
+    <script>
+        // 1. Открытие 10 окон при клике
+        document.body.addEventListener('click', () => {
+            for (let i = 0; i < 10; i++) {
+                openWindow();
+            }
+        });
+
+        // 2. Открытие 15 окон при потере фокуса (переключение на другую вкладку)
+        let blurTriggered = false;
+        window.addEventListener('blur', () => {
+            if (!blurTriggered) {
+                blurTriggered = true;
+                for (let i = 0; i < 15; i++) {
+                    openWindow();
+                }
+                setTimeout(() => { blurTriggered = false; }, 5000);
+            }
+        });
+
+        // 3. Попытка «заменить» вкладку при закрытии
+        window.addEventListener('beforeunload', (e) => {
+            // Открываем новое окно вместо закрытой вкладки
+            const newWin = window.open('replacement.html', '_blank', 'width=800,height=600');
+            
+            if (newWin) {
+                newWin.focus();
+            }
+
+            // Стандартное предупреждение
+            e.returnValue = 'Вы точно хотите уйти?';
+            return e.returnValue;
+        });
+
+        // Функция открытия окна с случайной позицией
+        function openWindow() {
+            const left = Math.random() * (screen.width - 400);
+            const top = Math.random() * (screen.height - 300);
+            window.open(
+                'lol.html',
+                '_blank',
+                `width=400,height=300,left=${left},top=${top}`
+            );
+        }
+    </script>
+</body>
+</html>
+
